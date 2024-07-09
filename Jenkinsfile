@@ -12,10 +12,8 @@ pipeline {
         stage('Prepare') {
             steps{
                 script {
-                    def image1 = params.image1
-                    def image2 = params.image2
-                    sh "cp ${image1} ./logos/image1.png"
-                    sh "cp ${image2} ./logos/image2.png"
+                    sh "cp ${params.icon} ./logos/image1.png"
+                    sh "cp ${params.logo} ./logos/image2.png"
                 }
             }
         }

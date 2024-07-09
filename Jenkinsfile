@@ -5,24 +5,17 @@ pipeline {
             }
       }
     parameters {
-        file(name: 'icon', description: 'icon file')
-        file(name: 'logo', description: 'logo file')
+        stashedFile(name: 'image1', description: 'Upload the first image file')
+        stashedFile(name: 'image2', description: 'Upload the second image file')
     }
     stages {
         stage('Prepare') {
             steps{
-                script {
-                    echo "Image 1: ${params.image1}"
-                    echo "Image 2: ${params.image2}"
+                unstash 'image1'
+                unstash 'image2'
 
-                    // Upewnij się, że pliki są faktycznie przekazywane
-                    if (params.image1 == null || params.image2 == null) {
-                        error "One or both file parameters are missing"
-                    }
-                    
-                    sh "cp ${params.icon} ./logos/image1.png"
-                    sh "cp ${params.logo} ./logos/image2.png"
-                }
+                sh 'mv image1 $image1_FILENAME'
+                sh 'mv image2 $image2_FILENAME'
             }
         }
         stage('Build') {

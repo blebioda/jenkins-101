@@ -22,8 +22,8 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
-                apt-get install zlib1g
-                python3 -m pip install -r requirements.txt
+                python3 -m pip install --upgrade pip
+                pip install -r requirements.txt
                 '''
             }
         }

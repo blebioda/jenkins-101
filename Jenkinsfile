@@ -11,11 +11,12 @@ pipeline {
     stages {
         stage('Prepare') {
             steps{
+                sh 'mkdir logos'
                 unstash 'image1'
                 unstash 'image2'
 
-                sh 'mv image1 $image1_FILENAME'
-                sh 'mv image2 $image2_FILENAME'
+                sh 'mv image1 ./logos/$image1_FILENAME'
+                sh 'mv image2 ./logos/$image2_FILENAME'
             }
         }
         stage('Build') {

@@ -40,7 +40,7 @@ pipeline {
             steps {
                 echo 'Deliver....'
                 sh '''
-                ls -lah
+                ls -lah logos
                 '''
             }
         }

@@ -40,7 +40,7 @@ pipeline {
             steps {
                 echo 'Deliver....'
                 sh '''
-                echo "doing delivery stuff.."
+                ls -lah
                 '''
             }
         }

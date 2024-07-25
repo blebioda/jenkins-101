@@ -4,8 +4,8 @@ import shutil
 from PIL import Image
 
 # Directory where PNG files are located
-directory = r".\logos"
-light_directory = r".\logos\light"
+directory = r"./logos"
+light_directory = r"./logos/light"
 
 icon_filename = ''
 logo_filename = ''

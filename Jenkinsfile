@@ -19,7 +19,7 @@ pipeline {
                 sh 'mv image2 ./logos/$image2_FILENAME'
             }
         }
-        stage('Build') {
+        stage('Install requirements') {
             steps {
                 echo "Building.."
                 sh '''
@@ -28,20 +28,28 @@ pipeline {
                 '''
             }
         }
-        stage('Test') {
+        stage('Generate') {
             steps {
-                echo "Testing.."
+                echo "Generating.."
                 sh '''
                 python3 logo_changer.py
                 '''
             }
         }
-        stage('Deliver') {
+        stage('Archive') {
             steps {
-                echo 'Deliver....'
+                echo 'Archiving....'
                 sh '''
-                ls -lah logos
+                zip -r logos.zip logos
                 '''
+                archiveArtifacts artifacts: 'logos.zip', fingerprint: true
+            }
+        }
+    post {
+        always {
+            script {
+                def downloadUrl = "${env.BUILD_URL}artifact/logos.zip"
+                echo "Download the ZIP file from: ${downloadUrl}"
             }
         }
     }

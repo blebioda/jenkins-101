@@ -40,8 +40,7 @@ pipeline {
             steps {
                 echo 'Installing zip...'
                 sh '''
-                apt-get update
-                apt-get install -y zip
+                apk update && apk add zip
                 '''
             }
         }

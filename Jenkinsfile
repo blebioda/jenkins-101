@@ -36,28 +36,20 @@ pipeline {
                 '''
             }
         }
-        stage('Install Zip') {
-            steps {
-                echo 'Installing zip...'
-                sh '''
-                sudo apk update && apk add zip
-                '''
-            }
-        }
         stage('Archive') {
             steps {
                 echo 'Archiving....'
                 sh '''
-                zip -r logos.zip logos
+                tar -czf logos.tar.gz logos
                 '''
-                archiveArtifacts artifacts: 'logos.zip', fingerprint: true
+                archiveArtifacts artifacts: 'logos.tar.gz', fingerprint: true
             }
         }
     }
     post {
         always {
             script {
-                def downloadUrl = "${env.BUILD_URL}artifact/logos.zip"
+                def downloadUrl = "${env.BUILD_URL}artifact/logos.tar.gz"
                 echo "Download the ZIP file from: ${downloadUrl}"
             }
         }

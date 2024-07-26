@@ -45,6 +45,7 @@ pipeline {
                 archiveArtifacts artifacts: 'logos.zip', fingerprint: true
             }
         }
+    }
     post {
         always {
             script {

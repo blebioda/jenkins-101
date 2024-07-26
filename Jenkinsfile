@@ -36,6 +36,15 @@ pipeline {
                 '''
             }
         }
+        stage('Install Zip') {
+            steps {
+                echo 'Installing zip...'
+                sh '''
+                apt-get update
+                apt-get install -y zip
+                '''
+            }
+        }
         stage('Archive') {
             steps {
                 echo 'Archiving....'
